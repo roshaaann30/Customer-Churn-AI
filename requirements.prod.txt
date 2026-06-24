@@ -1,21 +1,15 @@
-fastapi
-uvicorn[standard]
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
 
-pandas
-numpy
-scikit-learn
+pandas==2.3.1
+numpy==2.3.2
+scikit-learn==1.7.1
 
-xgboost
-catboost
+python-dotenv==1.1.1
 
-shap
+sqlalchemy==2.0.42
+psycopg2-binary==2.9.10
 
-python-dotenv
-
-psycopg2-binary
-
-redis
-
-joblib
+joblib==1.5.1
 
 requests
