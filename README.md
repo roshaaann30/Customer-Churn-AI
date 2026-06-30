@@ -539,17 +539,9 @@ Potential benefits:
 
 ---
 
-# 🏆 Resume Description
-
-**Enterprise AI-powered Customer Retention Platform**
-
-Built a full-stack AI platform using React, FastAPI, PostgreSQL, and Docker to predict customer churn, quantify revenue risk, and automate customer retention strategies. Implemented MLOps capabilities including monitoring, data drift detection, automated retraining, model registry, and explainable AI pipelines.
-
----
-
 # 👨‍💻 Author
 
-**Roshan**
+** V Roshan**
 
 Electronics & Communication Engineering
 
