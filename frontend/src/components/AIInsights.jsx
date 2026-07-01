@@ -1,75 +1,145 @@
+import React, {
+
+ useEffect,
+
+ useState
+
+} from "react";
+
 import axios from "axios";
 
-import {useEffect,useState} from "react";
+import {
 
-import {Paper,Typography} from "@mui/material";
+ Grid,
 
-function AIInsights(){
+ Card,
 
-const [insights,setInsights]=useState([])
+ CardContent,
 
-useEffect(()=>{
+ Typography
 
-axios
+} from "@mui/material";
 
-.get(
+export default function AIInsights(){
 
-"http://localhost:8000/ai-insights"
+ const [
 
-)
+  data,
 
-.then(
+  setData
 
-res=>setInsights(res.data)
+ ] = useState(null);
 
-)
+ useEffect(()=>{
 
-},[])
+  axios
 
-return(
+  .get(
 
-<Paper
+   "http://localhost:8000/insights"
 
-sx={{
+  )
 
-padding:3,
+  .then(
 
-marginTop:4,
+   res=>setData(
 
-borderRadius:4
+    res.data
 
-}}
+   )
 
->
+  );
 
-<Typography variant="h5">
+ },[]);
 
-AI Insights
+ if(!data)
 
-</Typography>
+  return <div>Loading...</div>;
 
-{
+ const cards=[
 
-insights.map(
+ {
 
-(item,index)=>(
+  title:"Revenue At Risk",
 
-<Typography key={index}>
+  value:data.revenue_at_risk
 
-• {item.insight}
+ },
 
-</Typography>
+ {
 
-)
+  title:"Highest Risk Segment",
 
-)
+  value:data.highest_risk_segment
+
+ },
+
+ {
+
+  title:"Best Retention Action",
+
+  value:data.best_retention_action
+
+ },
+
+ {
+
+  title:"Predicted Churn",
+
+  value:data.predicted_churn
+
+ }
+
+ ];
+
+ return(
+
+  <Grid container spacing={3}>
+
+   {
+
+    cards.map(card=>(
+
+     <Grid
+
+      item
+
+      xs={12}
+
+      md={6}
+
+      key={card.title}
+
+     >
+
+      <Card>
+
+       <CardContent>
+
+        <Typography variant="h6">
+
+         {card.title}
+
+        </Typography>
+
+        <Typography variant="h4">
+
+         {card.value}
+
+        </Typography>
+
+       </CardContent>
+
+      </Card>
+
+     </Grid>
+
+    ))
+
+   }
+
+  </Grid>
+
+ );
 
 }
-
-</Paper>
-
-)
-
-}
-
-export default AIInsights

@@ -1,107 +1,91 @@
-import axios from "axios";
+import React from "react";
 
-import { useEffect,useState } from "react";
+import { Box } from "@mui/material";
 
 import {
 
-Chart as ChartJS,
+ Pie
 
-CategoryScale,
+} from "react-chartjs-2";
 
-LinearScale,
+import {
 
-BarElement,
+ Chart as ChartJS,
 
-Tooltip,
+ ArcElement,
 
-Legend
+ Tooltip,
+
+ Legend
 
 } from "chart.js";
 
-import { Bar } from "react-chartjs-2";
-
-import { Paper } from "@mui/material";
-
 ChartJS.register(
 
-CategoryScale,
+ ArcElement,
 
-LinearScale,
+ Tooltip,
 
-BarElement,
-
-Tooltip,
-
-Legend
+ Legend
 
 );
 
-function SegmentDistributionChart(){
+export default function SegmentDistributionChart(){
 
-const [data,setData]=useState({})
+ const data={
 
-useEffect(()=>{
+  labels:[
 
-axios
+   "High Value",
 
-.get(
+   "Medium Value",
 
-"http://localhost:8000/segments-distribution"
+   "Low Value"
 
-)
+  ],
 
-.then(
+  datasets:[
 
-res=>setData(res.data)
+   {
 
-)
+    data:[
 
-},[])
+     35,
 
-const chartData={
+     40,
 
-labels:Object.keys(data),
+     25
 
-datasets:[{
+    ]
 
-label:"Customers",
+   }
 
-data:Object.values(data)
+  ]
 
-}]
+ };
 
-}
+ return(
 
-return(
+  <Box
 
-<Paper
+   sx={{
 
-sx={{
+    width:"100%",
 
-padding:3,
+    height:400
 
-marginTop:4,
+   }}
 
-borderRadius:4
+  >
 
-}}
+   <Pie
 
->
+    data={data}
 
-<h2>Customer Segments</h2>
+   />
 
-<Bar
+  </Box>
 
-key="segment-bar"
-
-data={chartData}
-
-/>
-
-</Paper>
-
-)
+ );
 
 }
-
-export default SegmentDistributionChart

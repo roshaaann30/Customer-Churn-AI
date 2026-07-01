@@ -1,88 +1,113 @@
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Tooltip,
-  Legend
-} from "chart.js";
+import React from "react";
 
-import { Bar } from "react-chartjs-2";
+import { Box } from "@mui/material";
+
+import {
+
+ Bar
+
+} from "react-chartjs-2";
+
+import {
+
+ Chart as ChartJS,
+
+ CategoryScale,
+
+ LinearScale,
+
+ BarElement,
+
+ Tooltip,
+
+ Legend
+
+} from "chart.js";
 
 ChartJS.register(
 
-  CategoryScale,
+ CategoryScale,
 
-  LinearScale,
+ LinearScale,
 
-  BarElement,
+ BarElement,
 
-  Tooltip,
+ Tooltip,
 
-  Legend
+ Legend
 
 );
 
-function MonthlyChurnChart() {
+export default function MonthlyChurnChart(){
 
-  const data = {
+ const data={
 
-    labels: [
+  labels:[
 
-      "Jan",
+   "Jan",
 
-      "Feb",
+   "Feb",
 
-      "Mar",
+   "Mar",
 
-      "Apr",
+   "Apr",
 
-      "May",
+   "May",
 
-      "Jun"
+   "Jun"
 
-    ],
+  ],
 
-    datasets: [
+  datasets:[
 
-      {
+   {
 
-        label: "Monthly Churn",
+    label:"Churn",
 
-        data: [
+    data:[
 
-          120,
+     6,
 
-          180,
+     8,
 
-          150,
+     7,
 
-          210,
+     10,
 
-          170,
+     9,
 
-          230
-
-        ]
-
-      }
+     8
 
     ]
 
-  };
+   }
 
-  return (
+  ]
 
-    <div>
+ };
 
-      <h2>Monthly Churn</h2>
+ return(
 
-      <Bar data={data} />
+  <Box
 
-    </div>
+   sx={{
 
-  );
+    width:"100%",
+
+    height:400
+
+   }}
+
+  >
+
+   <Bar
+
+    data={data}
+
+   />
+
+  </Box>
+
+ );
 
 }
-
-export default MonthlyChurnChart;

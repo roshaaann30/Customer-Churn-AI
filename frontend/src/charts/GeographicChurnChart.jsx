@@ -1,87 +1,109 @@
+import React from "react";
+
+import { Box } from "@mui/material";
+
 import {
 
-  Chart as ChartJS,
+ Bar
 
-  CategoryScale,
+} from "react-chartjs-2";
 
-  LinearScale,
+import {
 
-  BarElement,
+ Chart as ChartJS,
 
-  Tooltip,
+ CategoryScale,
 
-  Legend
+ LinearScale,
+
+ BarElement,
+
+ Tooltip,
+
+ Legend
 
 } from "chart.js";
 
-import { Bar } from "react-chartjs-2";
-
 ChartJS.register(
 
-  CategoryScale,
+ CategoryScale,
 
-  LinearScale,
+ LinearScale,
 
-  BarElement,
+ BarElement,
 
-  Tooltip,
+ Tooltip,
 
-  Legend
+ Legend
 
 );
 
-function GeographicChurnChart() {
+export default function GeographicChurnChart(){
 
-  const data = {
+ const data={
 
-    labels: [
+  labels:[
 
-      "California",
+   "USA",
 
-      "Texas",
+   "India",
 
-      "New York",
+   "UK",
 
-      "Florida"
+   "Canada",
 
-    ],
+   "Germany"
 
-    datasets: [
+  ],
 
-      {
+  datasets:[
 
-        label: "Churn",
+   {
 
-        data: [
+    label:"Churn Rate",
 
-          320,
+    data:[
 
-          280,
+     9,
 
-          210,
+     7,
 
-          180
+     8,
 
-        ]
+     6,
 
-      }
+     5
 
     ]
 
-  };
+   }
 
-  return (
+  ]
 
-    <div>
+ };
 
-      <h2>Geographic Churn</h2>
+ return(
 
-      <Bar data={data} />
+  <Box
 
-    </div>
+   sx={{
 
-  );
+    width:"100%",
+
+    height:400
+
+   }}
+
+  >
+
+   <Bar
+
+    data={data}
+
+   />
+
+  </Box>
+
+ );
 
 }
-
-export default GeographicChurnChart;

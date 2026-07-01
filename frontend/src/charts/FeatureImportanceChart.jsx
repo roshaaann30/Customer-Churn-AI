@@ -1,107 +1,109 @@
-import axios from "axios";
+import React from "react";
 
-import { useEffect,useState } from "react";
+import { Box } from "@mui/material";
 
 import {
 
-Chart as ChartJS,
+ Bar
 
-CategoryScale,
+} from "react-chartjs-2";
 
-LinearScale,
+import {
 
-BarElement,
+ Chart as ChartJS,
 
-Tooltip,
+ CategoryScale,
 
-Legend
+ LinearScale,
+
+ BarElement,
+
+ Tooltip,
+
+ Legend
 
 } from "chart.js";
 
-import { Bar } from "react-chartjs-2";
-
-import { Paper } from "@mui/material";
-
 ChartJS.register(
 
-CategoryScale,
+ CategoryScale,
 
-LinearScale,
+ LinearScale,
 
-BarElement,
+ BarElement,
 
-Tooltip,
+ Tooltip,
 
-Legend
+ Legend
 
 );
 
-function FeatureImportanceChart(){
+export default function FeatureImportanceChart(){
 
-const [data,setData]=useState({})
+ const data={
 
-useEffect(()=>{
+  labels:[
 
-axios
+   "Tenure",
 
-.get(
+   "MonthlyCharges",
 
-"http://localhost:8000/feature-importance"
+   "Contract",
 
-)
+   "Support",
 
-.then(
+   "Engagement"
 
-res=>setData(res.data)
+  ],
 
-)
+  datasets:[
 
-},[])
+   {
 
-const chartData={
+    label:"Importance",
 
-labels:Object.keys(data),
+    data:[
 
-datasets:[{
+     0.85,
 
-label:"Importance",
+     0.76,
 
-data:Object.values(data)
+     0.63,
 
-}]
+     0.42,
+
+     0.31
+
+    ]
+
+   }
+
+  ]
+
+ };
+
+ return(
+
+  <Box
+
+   sx={{
+
+    width:"100%",
+
+    height:400
+
+   }}
+
+  >
+
+   <Bar
+
+    data={data}
+
+   />
+
+  </Box>
+
+ );
 
 }
-
-return(
-
-<Paper
-
-sx={{
-
-padding:3,
-
-marginTop:4,
-
-borderRadius:4
-
-}}
-
->
-
-<h2>Feature Importance</h2>
-
-<Bar
-
-key="feature-bar"
-
-data={chartData}
-
-/>
-
-</Paper>
-
-)
-
-}
-
-export default FeatureImportanceChart

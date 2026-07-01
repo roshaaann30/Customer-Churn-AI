@@ -1,12 +1,10 @@
-import axios from "axios";
+import React from "react";
 
-import { useEffect, useState } from "react";
-
-import { Grid, Typography, Box } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
 import KPIcard from "../components/KPIcard";
 
-import DashboardLayout from "../components/DashboardLayout";
+import RevenueTrendChart from "../charts/RevenueTrendChart";
 
 import RiskDistributionChart from "../charts/RiskDistributionChart";
 
@@ -14,138 +12,128 @@ import SegmentDistributionChart from "../charts/SegmentDistributionChart";
 
 import AIInsights from "../components/AIInsights";
 
-function Dashboard() {
-
-  const [customers, setCustomers] = useState([]);
-
-  const [revenue, setRevenue] = useState({});
-
-  const [retention, setRetention] = useState({});
-
-  useEffect(() => {
-
-    axios
-
-      .get("http://localhost:8000/customers")
-
-      .then((res) => setCustomers(res.data))
-
-      .catch((err) => console.log(err));
-
-    axios
-
-      .get("http://localhost:8000/revenue")
-
-      .then((res) => setRevenue(res.data[0]))
-
-      .catch((err) => console.log(err));
-
-    axios
-
-      .get("http://localhost:8000/retention-impact")
-
-      .then((res) => setRetention(res.data))
-
-      .catch((err) => console.log(err));
-
-  }, []);
-
-  const highRisk = customers.filter(
-
-    (customer) => customer.risk_score >= 75
-
-  ).length;
+export default function Dashboard() {
 
   return (
 
-    <><DashboardLayout>
+    <Box
 
-          <Typography
+      sx={{
 
-              variant="h4"
+        p: {
 
-              sx={{
-                  fontWeight: 700,
+          xs: 2,
 
-                  marginBottom: 4
-              }}
+          md: 3
 
-          >
+        }
 
-              Enterprise Analytics Dashboard
+      }}
 
-          </Typography>
+    >
 
-          <Grid
+      <Typography
 
-              container
+        variant="h4"
 
-              spacing={3}
+        gutterBottom
 
-          >
+      >
 
-              <Grid item xs={12} md={3}>
+        Customer Churn Dashboard
 
-                  <KPIcard
+      </Typography>
 
-                      title="Total Customers"
+      {/* KPI Section */}
 
-                      value={customers.length} />
+      <Grid
 
-              </Grid>
+        container
 
-              <Grid item xs={12} md={3}>
+        spacing={3}
 
-                  <KPIcard
+      >
 
-                      title="High Risk Customers"
+        <Grid item xs={12} sm={6} md={3}>
 
-                      value={highRisk} />
+          <KPIcard />
 
-              </Grid>
+        </Grid>
 
-              <Grid item xs={12} md={3}>
+        <Grid item xs={12} sm={6} md={3}>
 
-                  <KPIcard
+          <KPIcard />
 
-                      title="Revenue At Risk"
+        </Grid>
 
-                      value={`$${revenue?.Revenue_At_Risk || 0}`} />
+        <Grid item xs={12} sm={6} md={3}>
 
-              </Grid>
+          <KPIcard />
 
-              <Grid item xs={12} md={3}>
+        </Grid>
 
-                  <KPIcard
+        <Grid item xs={12} sm={6} md={3}>
 
-                      title="Retention Success"
+          <KPIcard />
 
-                      value={`${Math.round(
+        </Grid>
 
-                          retention?.average_retention_gain || 28
+      </Grid>
 
-                      )}%`} />
+      <Box sx={{ mt: 4 }} />
 
-              </Grid>
+      {/* Revenue + Risk */}
 
-          </Grid>
+      <Grid
 
-          <Box sx={{ marginTop: 6 }}>
+        container
 
-              <RiskDistributionChart />
+        spacing={3}
 
-          </Box>
+      >
 
-          <Box sx={{ marginTop: 6 }}>
+        <Grid item xs={12} lg={8}>
 
-              <SegmentDistributionChart />
+          <RevenueTrendChart />
 
-          </Box>
+        </Grid>
 
-      </DashboardLayout>
-      <AIInsights /></>
+        <Grid item xs={12} lg={4}>
+
+          <RiskDistributionChart />
+
+        </Grid>
+
+      </Grid>
+
+      <Box sx={{ mt: 4 }} />
+
+      {/* Segments */}
+
+      <Grid
+
+        container
+
+        spacing={3}
+
+      >
+
+        <Grid item xs={12}>
+
+          <SegmentDistributionChart />
+
+        </Grid>
+
+      </Grid>
+
+      <Box sx={{ mt: 4 }} />
+
+      {/* AI Insights */}
+
+      <AIInsights />
+
+    </Box>
+
   );
 
 }
-
-export default Dashboard;

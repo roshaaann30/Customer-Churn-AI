@@ -1,97 +1,91 @@
-import axios from "axios";
+import React from "react";
 
-import { useEffect, useState } from "react";
+import { Box } from "@mui/material";
 
 import {
 
-Chart as ChartJS,
+ Doughnut
 
-ArcElement,
+} from "react-chartjs-2";
 
-Tooltip,
+import {
 
-Legend
+ Chart as ChartJS,
+
+ ArcElement,
+
+ Tooltip,
+
+ Legend
 
 } from "chart.js";
 
-import { Pie } from "react-chartjs-2";
-
-import { Paper } from "@mui/material";
-
 ChartJS.register(
 
-ArcElement,
+ ArcElement,
 
-Tooltip,
+ Tooltip,
 
-Legend
+ Legend
 
 );
 
-function RiskDistributionChart(){
+export default function RiskDistributionChart(){
 
-const [data,setData]=useState({})
+ const data={
 
-useEffect(()=>{
+  labels:[
 
-axios
+   "High",
 
-.get(
+   "Medium",
 
-"http://localhost:8000/risk-distribution"
+   "Low"
 
-)
+  ],
 
-.then(
+  datasets:[
 
-res=>setData(res.data)
+   {
 
-)
+    data:[
 
-},[])
+     25,
 
-const chartData={
+     45,
 
-labels:Object.keys(data),
+     30
 
-datasets:[{
+    ]
 
-data:Object.values(data)
+   }
 
-}]
+  ]
 
-}
+ };
 
-return(
+ return(
 
-<Paper
+  <Box
 
-sx={{
+   sx={{
 
-padding:3,
+    width:"100%",
 
-marginTop:4,
+    height:400
 
-borderRadius:4
+   }}
 
-}}
+  >
 
->
+   <Doughnut
 
-<h2>Risk Distribution</h2>
+    data={data}
 
-<Pie
+   />
 
-key="risk-pie"
+  </Box>
 
-data={chartData}
-
-/>
-
-</Paper>
-
-)
+ );
 
 }
-
-export default RiskDistributionChart

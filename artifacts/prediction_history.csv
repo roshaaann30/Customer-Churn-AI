@@ -1,0 +1,21 @@
+timestamp,customer_id,risk_score,segment,recommendation
+
+2026-06-24 09:10:00,1001,92,High Value,Offer Premium Support
+
+2026-06-24 09:20:00,1002,81,Price Sensitive,Offer 10% Discount
+
+2026-06-24 09:35:00,1003,64,Medium Value,Send Loyalty Email
+
+2026-06-24 09:50:00,1004,95,High Value,Assign Success Manager
+
+2026-06-24 10:05:00,1005,58,Low Value,Engagement Campaign
+
+2026-06-24 10:20:00,1006,88,Price Sensitive,Offer Loyalty Rewards
+
+2026-06-24 10:35:00,1007,72,Medium Value,Send Personalized Email
+
+2026-06-24 10:50:00,1008,97,High Value,Assign Dedicated Manager
+
+2026-06-24 11:05:00,1009,61,Low Value,Engagement Campaign
+
+2026-06-24 11:20:00,1010,85,Price Sensitive,Offer Discount Package

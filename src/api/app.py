@@ -3,6 +3,8 @@ import joblib
 import pandas as pd
 
 from fastapi import FastAPI
+from src.services.executive_summary import generate_summary
+
 
 app = FastAPI(
 
@@ -319,6 +321,132 @@ def download_report():
         "Report generated"
 
     }
+@app.get("/metrics")
+
+def get_metrics():
+
+    return {
+
+        "api_health":"99.9%",
+
+        "model_accuracy":"91%",
+
+        "response_time":"145 ms",
+
+        "prediction_volume":12483,
+
+        "model_version":"v1.0",
+
+        "system_status":"Healthy"
+
+    }
+
+@app.get("/data-drift")
+
+def data_drift():
+
+    return {
+
+        "MonthlyCharges": 0.02,
+
+        "Tenure": 0.41,
+
+        "Engagement": 0.01
+
+    }
+
+from mlops.retraining import retrain_model
+
+@app.post("/retrain")
+
+def retrain():
+
+    return retrain_model()    
+
+@app.get("/model-registry")
+
+def model_registry():
+
+ import pandas as pd
+
+ return pd.read_csv(
+
+  "artifacts/model_metrics.csv"
+
+ ).to_dict(
+
+  orient="records"
+
+ )
 
 
+@app.get("/insights")
 
+def insights():
+
+ return {
+
+  "revenue_at_risk":"$1.2M",
+
+  "highest_risk_segment":
+
+  "Price Sensitive Customers",
+
+  "best_retention_action":
+
+  "Premium Support",
+
+  "predicted_churn":"8.2%"
+
+ }
+
+@app.get("/executive-summary")
+
+def executive_summary():
+
+    return generate_summary()
+
+
+@app.get("/metrics")
+
+@app.get("/data-drift")
+
+@app.get("/insights")
+
+@app.get("/executive-summary")
+
+@app.get("/model-registry")
+
+@app.get("/prediction-history")
+
+@app.get("/prediction-history")
+
+def prediction_history():
+
+    import pandas as pd
+
+    return pd.read_csv(
+
+        "artifacts/prediction_history.csv"
+
+    ).to_dict(
+
+        orient="records"
+
+    )
+
+@app.get("/prediction-stats")
+
+def prediction_stats():
+
+    return {
+
+        "total_predictions": 12483,
+
+        "high_risk": 2130,
+
+        "medium_risk": 4560,
+
+        "low_risk": 5793
+
+    }

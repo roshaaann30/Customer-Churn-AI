@@ -1,89 +1,99 @@
-import { Link } from "react-router-dom";
+import React from "react";
 
-function Navbar() {
+import {
+
+  AppBar,
+
+  Toolbar,
+
+  Typography,
+
+  Box
+
+} from "@mui/material";
+
+import SearchBar from "./SearchBar";
+
+import NotificationCenter from "./NotificationCenter";
+
+import UserProfile from "./UserProfile";
+
+import ThemeToggle from "./ThemeToggle";
+
+export default function Navbar({
+
+  mode,
+
+  setMode
+
+}) {
 
   return (
 
-    <nav
+    <AppBar
 
-      style={{
+      position="fixed"
 
-        display: "flex",
+      sx={{
 
-        gap: "30px",
+        zIndex: (theme) =>
 
-        padding: "20px",
-
-        background: "#1976d2",
+          theme.zIndex.drawer + 1
 
       }}
 
     >
 
-      <Link
+      <Toolbar
 
-        style={{ color: "white" }}
+        sx={{
 
-        to="/"
+          gap: 2
 
-      >
-
-        Dashboard
-
-      </Link>
-
-      <Link
-
-        style={{ color: "white" }}
-
-        to="/analytics"
+        }}
 
       >
 
-        Analytics
+        <Typography
 
-      </Link>
+          variant="h6"
 
-      <Link
+        >
 
-        style={{ color: "white" }}
+          Customer Churn AI
 
-        to="/customers"
+        </Typography>
 
-      >
+        <Box
 
-        Customers
+          sx={{
 
-      </Link>
+            flexGrow: 1
 
-      <Link
+          }}
 
-        style={{ color: "white" }}
+        >
 
-        to="/recommendations"
+          <SearchBar />
 
-      >
+        </Box>
 
-        Recommendations
+        <NotificationCenter />
 
-      </Link>
+        <UserProfile />
 
-      <Link
+        <ThemeToggle
 
-        style={{ color: "white" }}
+          mode={mode}
 
-        to="/executive"
+          setMode={setMode}
 
-      >
+        />
 
-        Executive
+      </Toolbar>
 
-      </Link>
-
-    </nav>
+    </AppBar>
 
   );
 
 }
-
-export default Navbar;
