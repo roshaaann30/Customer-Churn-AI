@@ -389,19 +389,16 @@ README.md
 
 ## Executive Dashboard
 
-(Add dashboard screenshot)
+![Executive Dashboard](screenshots/executive_dashboard.png)
 
 ## Analytics Dashboard
 
-(Add analytics screenshot)
+![Analytics Dashboard](screenshots/model_performance.png)
 
 ## Monitoring Dashboard
 
-(Add monitoring screenshot)
+![Monitoring Dashboard](screenshots/model_monitoring.png)
 
-## Model Registry
-
-(Add registry screenshot)
 
 ---
 
